@@ -35,7 +35,7 @@ def main(argv: List[str]):
 
     print("Runtime:", runtime)
 
-    print("Solutions found:", solutions)
+    print("Solutions found ({}): {}".format(len(solutions), solutions))
 
 
 def create_problem(min_value: int, max_value: int) -> constraint.Problem:
