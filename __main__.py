@@ -16,7 +16,7 @@ def main(argv: List[str]):
 
     parser.add_argument("method", type=str)
     parser.add_argument("--min", type=int, default=0)
-    parser.add_argument("--max", type=int, default=1000)
+    parser.add_argument("--max", type=int, default=3000)
 
     args = parser.parse_args(argv)
 
