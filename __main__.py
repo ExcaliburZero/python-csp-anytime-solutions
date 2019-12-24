@@ -39,6 +39,10 @@ def main(argv: List[str]):
 
 
 def create_problem(min_value: int, max_value: int) -> constraint.Problem:
+    """
+    Creates a simple problem that, with a large enough input domain, should run for a while and waste
+    some CPU cycles.
+    """
     problem = constraint.Problem()
     problem.addVariable("a", range(min_value, max_value))
     problem.addVariable("b", range(min_value, max_value))
@@ -49,6 +53,9 @@ def create_problem(min_value: int, max_value: int) -> constraint.Problem:
 
 
 def calculate_all_solutions(problem: constraint.Problem) -> List[Solution]:
+    """
+    Solves for all of the solutions to the given problem in one go.
+    """
     return problem.getSolutions()
 
 
@@ -89,6 +96,10 @@ def calculate_solutions_and_store(
     solution_queue: "multiprocessing.Queue[Solution]",
     queue_lock: "multiprocessing.synchronize.Lock",
 ) -> None:
+    """
+    Uses the getSolutionIter interface to find solutions to the given problem one by one and add
+    them to the given multiprocess queue.
+    """
     solution_iter = problem.getSolutionIter()
     while True:
         try:
@@ -103,6 +114,11 @@ def calculate_solutions_and_store(
 
 
 def multiprocess_queue_to_list(multiprocess_queue: multiprocessing.Queue) -> List:
+    """
+    Reads all of the items from the given multiprocess queue and returns them as a list.
+
+    Assumes that no new items will be added to the queue after this method starts.
+    """
     items = []
     while True:
         try:
